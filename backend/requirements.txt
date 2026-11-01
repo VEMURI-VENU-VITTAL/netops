@@ -6,3 +6,4 @@ pydantic-settings
 redis
 pytest
 httpx
+alembic
