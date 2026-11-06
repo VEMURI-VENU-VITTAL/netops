@@ -4,10 +4,12 @@ from redis.exceptions import RedisError
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
+from app.api.devices import router as device_router
 from app.config import settings
 from app.db import engine
 
 app = FastAPI(title="NetOps Portal API")
+app.include_router(device_router)
 
 
 @app.get("/health")

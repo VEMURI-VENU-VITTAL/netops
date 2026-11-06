@@ -8,6 +8,10 @@ class Settings(BaseSettings):
     postgres_host: str = "db"
     redis_url: str = "redis://redis:6379/0"
     mock_mode: bool = True
+    netbox_url: str = "https://demo.netbox.dev"
+    netbox_token: str = ""
+    netbox_site: str = ""
+
 
     @property
     def database_url(self) -> str:
