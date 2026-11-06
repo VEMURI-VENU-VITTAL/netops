@@ -13,7 +13,7 @@ def fetch_netbox_devices() -> list[dict]:
     filters = {"site":settings.netbox_site} if settings.netbox_site else {}
     records = []
 
-    for d in nb.dcim.devices.filters(**filters):
+    for d in nb.dcim.devices.filter(**filters):
         if not d.name:
             continue
         records.append({
