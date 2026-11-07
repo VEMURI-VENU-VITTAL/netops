@@ -1,3 +1,5 @@
+const TOKEN_KEY = 'netops_token'
+
 export type Device = {
   id: number
   netbox_id: number
@@ -7,6 +9,12 @@ export type Device = {
   mgmt_ip: string | null
   last_backup_at: string | null
   drift_status: string
+}
+
+export const auth = {
+  get: () => localStorage.getItem(TOKEN_KEY),
+  set: (token: string) => localStorage.setItem(TOKEN_KEY, token),
+  clear: () => localStorage.removeItem(TOKEN_KEY),
 }
 
 export type Health = { api: string; database: string; redis: string; mock_mode: boolean }
@@ -22,6 +30,11 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  login: (username: string, password: string) =>
+    request<{ access_token: string }>('/auth/login', {
+      method: 'POST',
+      body: new URLSearchParams({ username, password }),
+    }),
   health: () => request<Health>('/health'),
   devices: () => request<Device[]>('/devices'),
   syncDevices: () => request<SyncResult>('/devices/sync', { method: 'POST' }),

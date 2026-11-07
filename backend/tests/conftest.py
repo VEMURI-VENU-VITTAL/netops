@@ -1,5 +1,6 @@
 import pytest
-from app import models  # noqa: F401  (registers the models)
+from app import models
+from app.auth import get_current_user
 from app.db import Base, get_db
 from app.main import app
 from fastapi.testclient import TestClient
@@ -19,7 +20,14 @@ def db_session():
 
 
 @pytest.fixture
-def client(db_session):
+def anon_client(db_session):
     app.dependency_overrides[get_db] = lambda: db_session
     yield TestClient(app)
     app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def client(anon_client):
+    app.dependency_overrides[get_current_user] = lambda: models.User(
+        username="tester", role="admin", password_hash="x")
+    yield anon_client

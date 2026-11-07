@@ -1,4 +1,5 @@
 import pynetbox
+
 # from app.config import settings
 
 nb = pynetbox.api("https://demo.netbox.dev", token = "nbt_VZblo0mWDBa0.XmXxgzl7eFn5IrSnlm0BsPgXa2muCCzEB4yNx37V")

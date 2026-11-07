@@ -18,3 +18,6 @@ th { font-size: 13px; color: #52606d; }
 .badge.unknown { background: #e4e7eb; color: #3e4c59; }
 .error { color: #b91c1c; }
 .note { color: #52606d; }
+.login { max-width: 320px; margin: 80px auto; display: flex; flex-direction: column; gap: 12px; }
+.login input { min-width: 0; }
+.logout { margin-left: auto; background: transparent; border: 1px solid #52606d; }

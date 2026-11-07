@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     netbox_url: str = "https://demo.netbox.dev"
     netbox_token: str = ""
     netbox_site: str = ""
+    jwt_secret: str = ""
+    jwt_expire_minutes: int = 480
 
 
     @property
