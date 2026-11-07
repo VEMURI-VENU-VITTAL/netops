@@ -21,13 +21,22 @@ export type Health = { api: string; database: string; redis: string; mock_mode: 
 export type SyncResult = { created: number; updated: number; total: number }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const r = await fetch(`/api${path}`, init)
+  const headers = new Headers(init?.headers)
+  const token = auth.get()
+  if (token) headers.set('Authorization', `Bearer ${token}`)
+
+  const r = await fetch(`/api${path}`, { ...init, headers })
+  if (r.status === 401 && token) {
+    auth.clear()
+    window.location.assign('/login')
+  }
   if (!r.ok) {
     const body = await r.json().catch(() => ({}))
     throw new Error(body.detail ?? `HTTP ${r.status}`)
   }
   return r.json()
 }
+
 
 export const api = {
   login: (username: string, password: string) =>
