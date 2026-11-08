@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     netbox_site: str = ""
     jwt_secret: str = "secret"
     jwt_expire_minutes: int = 480
+    backup_dir: str = "/data/backups"
+    net_user: str= ""
+    net_pass: str = ""
 
 
     @property

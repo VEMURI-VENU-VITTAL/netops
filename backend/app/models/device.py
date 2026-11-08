@@ -12,7 +12,7 @@ class Device(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     netbox_id: Mapped[int] = mapped_column(unique=True)
     name: Mapped[str] = mapped_column(String(100))
-    site: Mapped[str] = mapped_column(String(100))
+    site: Mapped[str | None] = mapped_column(String(100))
     platform: Mapped[str | None] = mapped_column(String(50))
     mgmt_ip: Mapped[str | None] = mapped_column(String(50))
     last_backup_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

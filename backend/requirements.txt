@@ -11,3 +11,7 @@ pynetbox
 pyjwt
 pwdlib[argon2]
 python-multipart
+rq
+gitpython
+nornir
+nornir-netmiko
